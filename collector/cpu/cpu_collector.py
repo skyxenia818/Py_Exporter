@@ -1,6 +1,5 @@
 from prometheus_client.core import CounterMetricFamily
-from collector.base_collector import BaseCollector
-import time
+import threading
 
 CPU_MODES = [
     "user",
@@ -15,32 +14,42 @@ CPU_MODES = [
     "guest_nice",
 ]
 
-class CpuCollector(BaseCollector):
+class CpuCollector():
+    def __init__(self):
+        self._lock = threading.Lock()
+        self._last_stats = {}  # { (cpu, mode): value }
+
     def collect(self):
-        """
-        Called by Prometheus on each scrape
-        """
         metric = CounterMetricFamily(
             "node_cpu_seconds_total",
             "Seconds the CPUs spent in each mode.",
             labels=["cpu", "mode"],
         )
 
+        current = {}
+
         with open("/proc/stat", "r") as f:
             for line in f:
-                if not line.startswith("cpu"):
+                if not line.startswith("cpu") or line.startswith("cpu "):
                     continue
-                if line.startswith("cpu "):
-                    continue  # skip total cpu line
 
                 parts = line.split()
-                cpu = parts[0][3:]  # cpu0 -> 0
+                cpu = parts[0][3:]
                 values = parts[1:]
 
                 for mode, value in zip(CPU_MODES, values):
-                    metric.add_metric(
-                        [cpu, mode],
-                        float(value),
-                    )
+                    current[(cpu, mode)] = float(value)
+
+        with self._lock:
+            for key, value in current.items():
+                last = self._last_stats.get(key)
+
+                # 防 counter 回退
+                if last is None or value >= last:
+                    metric.add_metric([key[0], key[1]], value)
+                    self._last_stats[key] = value
+                else:
+                    # 回退：继续暴露旧值
+                    metric.add_metric([key[0], key[1]], last)
 
         yield metric

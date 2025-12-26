@@ -2,6 +2,8 @@ from fastapi import FastAPI, Response
 from collector.main import register
 from core.config import settings
 from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
+import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="FastAPI + Prometheus CPU Exporter")
 
