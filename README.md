@@ -1,4 +1,4 @@
-# FastAPI + Prometheus CPU Exporter
+# FastAPI + Prometheus Exporter
 
 #### 1. Set up environment
 
