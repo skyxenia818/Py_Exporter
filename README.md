@@ -9,7 +9,7 @@ pip install uv
 ```
 
 ------------------------------------------------------------------------------------------------
-**ex.** How to change source for uv(换源)
+**ex.** How to change source for uv(for China main land)
 
 create uv global config file:
 
