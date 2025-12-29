@@ -52,3 +52,7 @@ uv run main.py
 ```
 
 Same, you can set `PORT` environment variable to change the port (default is 9000)
+
+#### 3. Check Metrics
+
+Access `http://127.0.0.1:PORT/metrics` or `http://127.0.0.1:PORT/metrics_html` to check metrics.
