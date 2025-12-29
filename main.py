@@ -6,7 +6,7 @@ from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="FastAPI + Prometheus CPU Exporter")
+app = FastAPI(title="FastAPI + Prometheus Exporter")
 
 
 @app.get("/metrics")
