@@ -5,7 +5,7 @@ from collector.filesys.filesys_collector_linux import FilesysCollector
 from collector.memory.mem_collector_linux import MemCollector
 
 register = REGISTRY
-register.register(CpuCollector())
-register.register(DiskIOCollector())
-register.register(FilesysCollector())
+# register.register(CpuCollector())
+# register.register(DiskIOCollector())
+# register.register(FilesysCollector())
 register.register(MemCollector())
