@@ -1,5 +1,6 @@
 from prometheus_client.core import CounterMetricFamily
 import threading
+import os
 
 CPU_MODES = [
     "user",
@@ -13,6 +14,8 @@ CPU_MODES = [
     "guest",
     "guest_nice",
 ]
+
+USER_HZ = os.sysconf(os.sysconf_names["SC_CLK_TCK"])
 
 class CpuCollector():
     def __init__(self):
@@ -38,7 +41,7 @@ class CpuCollector():
                 values = parts[1:]
 
                 for mode, value in zip(CPU_MODES, values):
-                    current[(cpu, mode)] = float(value)
+                    current[(cpu, mode)] = float(value) / USER_HZ
 
         with self._lock:
             for key, value in current.items():
