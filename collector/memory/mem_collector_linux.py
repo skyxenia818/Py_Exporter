@@ -72,7 +72,7 @@ class MemCollector:
 
                 for metric_name, metric in MEM_METRICS:
                     if metric_name == memtype:
-                        current[memtype] = float(value)
+                        current[memtype] = float(value) * 1024
 
         with self._lock:
             for metric_name, metric in MEM_METRICS:
