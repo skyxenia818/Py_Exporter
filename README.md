@@ -15,6 +15,8 @@ This is a Prometheus Exporter based on Python, and metrics are exposed with Fast
 - An HTML doc page to display metrics
 - Only support Linux for now.
 
+## Installation
+
 #### 1. Set up environment
 
 Install uv (if you didn't install uv yet)
@@ -71,3 +73,7 @@ Same, you can set `PORT` environment variable to change the port (default is 900
 #### 3. Check Metrics
 
 Access `http://127.0.0.1:PORT/metrics` or `http://127.0.0.1:PORT/metrics_html` to check metrics.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
