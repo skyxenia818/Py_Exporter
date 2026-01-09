@@ -1,5 +1,20 @@
 # FastAPI + Prometheus Exporter
 
+This is a Prometheus Exporter based on Python, and metrics are exposed with Fast API.
+
+## Features
+
+- Same metrics as Node Exporter, which allow you to migrate from Node Exporter to this exporter easily.
+![](resource/metrics.png)
+- Support metrics: 
+  - Memory metrics
+  - CPU metrics
+  - Disk metrics
+  - Network metrics
+  - Filesystem metrics
+- An HTML doc page to display metrics
+- Only support Linux for now.
+
 #### 1. Set up environment
 
 Install uv (if you didn't install uv yet)
