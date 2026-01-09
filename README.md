@@ -1,4 +1,4 @@
-# FastAPI + Prometheus Exporter
+# PyExporter
 
 This is a Prometheus Exporter based on Python, and metrics are exposed with Fast API.
 
